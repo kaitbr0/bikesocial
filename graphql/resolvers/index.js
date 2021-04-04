@@ -3,15 +3,11 @@ const usersResolvers = require("./users");
 const commentsResolvers = require("./comments");
 //resolvers: for each query/mutation/subscription has a corresponding resolver.
 //processes the logic and returns what the query returns
-
+//parent holds the whole document
 module.exports = {
   Post: {
-    likeCount(parent) {
-      return parent.likes.length;
-    },
-    commentCount(parent) {
-      return parent.comments.length;
-    },
+    likeCount: (parent) => parent.likes.length,
+    commentCount: (parent) => parent.comments.length,
   },
   Query: {
     ...postsResolvers.Query,
