@@ -5,6 +5,14 @@ const commentsResolvers = require("./comments");
 //processes the logic and returns what the query returns
 
 module.exports = {
+  Post: {
+    likeCount(parent) {
+      return parent.likes.length;
+    },
+    commentCount(parent) {
+      return parent.comments.length;
+    },
+  },
   Query: {
     ...postsResolvers.Query,
   },
@@ -12,5 +20,8 @@ module.exports = {
     ...usersResolvers.Mutation,
     ...postsResolvers.Mutation,
     ...commentsResolvers.Mutation,
+  },
+  Subscription: {
+    ...postsResolvers.Subscription,
   },
 };
