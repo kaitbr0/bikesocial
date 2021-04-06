@@ -11,17 +11,17 @@ function Register() {
     confirmPassword: "",
   });
   const onChange = (event) => {
-    setValues({ ...values, [event.target.name]: [event.target.value] });
+    setValues({ ...values, [event.target.name]: event.target.value });
   };
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(proxy, result) {
       console.log(result);
     },
     variables: {
-      username: values.username[0],
-      email: values.email[0],
-      password: values.password[0],
-      confirmPassword: values.confirmPassword[0],
+      username: values.username,
+      email: values.email,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
     },
   });
   const onSubmit = async (event) => {
