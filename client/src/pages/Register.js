@@ -2,39 +2,32 @@ import React, { useState } from "react";
 import { Form, Button } from "semantic-ui-react";
 import { useMutation } from "@apollo/react-hooks";
 import gql from "graphql-tag";
+import { useForm } from "../util/hooks";
 
 function Register(props) {
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
+
+  const { onChange, onSubmit, values } = useForm(registerUser, {
     username: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const onChange = (event) => {
-    setValues({ ...values, [event.target.name]: event.target.value });
-  };
+
   const [addUser, { loading }] = useMutation(REGISTER_USER, {
     update(_, result) {
-      console.log(result);
       props.history.push("/");
     },
     onError(err) {
       setErrors(err.graphQLErrors[0].extensions.exception.errors);
     },
-    variables: {
-      username: values.username,
-      email: values.email,
-      password: values.password,
-      confirmPassword: values.confirmPassword,
-    },
+    variables: values,
   });
-  const onSubmit = async (event) => {
-    event.preventDefault();
-    //send mutation to server to persist users
-    console.log(event, values);
-    await addUser();
-  };
+  //function keyword causes hoisting
+  function registerUser() {
+    addUser();
+  }
+
   return (
     <div className="form-container">
       <Form onSubmit={onSubmit} noValidate className={loading ? "loading" : ""}>
