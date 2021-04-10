@@ -8,7 +8,7 @@ export const useForm = (callback, initialState = {}) => {
   const onSubmit = (event) => {
     event.preventDefault();
     //send mutation to server to persist users
-    console.log(event, values);
+    // console.log(event, values);
     callback();
   };
 
