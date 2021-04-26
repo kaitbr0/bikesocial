@@ -8,9 +8,7 @@ import LikeButton from "../components/LikeButton";
 function SinglePost(props) {
   const postId = props.match.params.postId;
   const { user } = useContext(AuthContext);
-  const {
-    data: { getPost },
-  } = useQuery(FETCH_POST_QUERY, {
+  const { data: { getPost } = {} } = useQuery(FETCH_POST_QUERY, {
     variables: {
       postId,
     },
@@ -69,6 +67,7 @@ function SinglePost(props) {
       </Grid>
     );
   }
+  return <div>{postMarkup}</div>;
 }
 
 const FETCH_POST_QUERY = gql`
