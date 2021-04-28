@@ -30,7 +30,7 @@ function DeleteButton({ postId, commentId, callback }) {
   });
   return (
     <>
-      <MyPopup content={commentId ? "Delete Comment" : "Delete Post"} inverted>
+      <MyPopup content={commentId ? "Delete Comment" : "Delete Post"}>
         <Button
           as="div"
           color="red"
